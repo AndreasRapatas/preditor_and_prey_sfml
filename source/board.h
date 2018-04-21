@@ -168,7 +168,7 @@ public:
 	}
 
 	uint32_t inline color32(uint8_t r, uint8_t g, uint8_t b, uint8_t a = 255) const {
-		// Asume litle-endian
+		// Asume little-endian
 		return (r << 8 * 0) + (g << 8 * 1) + (b << 8 * 2) + (a << 8 * 3);
 	}
 
