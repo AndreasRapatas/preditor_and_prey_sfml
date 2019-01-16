@@ -23,18 +23,16 @@ project(
 
 add_executable(
 	${PROJECT_NAME}
-	./source/main.cpp
+	./src/main.cpp
 )
 
 
 # SFML
-set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules" ${CMAKE_MODULE_PATH})
 find_package(SFML 2 REQUIRED network audio graphics window system)
 target_link_libraries(
-	${PROJECT_NAME} 
-
-
-	${SFML_LIBRARIES} 
+	${PROJECT_NAME}
+	${SFML_LIBRARIES}
 	${SFML_DEPENDENCIES}
 )
 
@@ -59,7 +57,7 @@ write_basic_package_version_file(
 )
 
 configure_package_config_file(
-	"${PROJECT_SOURCE_DIR}/cmake/${PROJECT_NAME}Config.cmake.in"
+	"${PROJECT_SOURCE_DIR}/cmake/configs/${PROJECT_NAME}Config.cmake.in"
 	"${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
 	INSTALL_DESTINATION lib/cmake/${PROJECT_NAME}
 )
