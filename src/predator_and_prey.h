@@ -7,7 +7,7 @@
 #include <CAVIS/cellular_automaton.h>
 #include <flat_matrix/flat_matrix.h>
 
-class PreditorAndPrey : public CellularAutomaton {
+class PredatorAndPrey : public CellularAutomaton {
 
 private:
 
@@ -48,7 +48,7 @@ private:
 
 public:
 
-	PreditorAndPrey(sf::Vector2u dim) :
+	PredatorAndPrey(sf::Vector2u dim) :
 		width(dim.x),
 		height(dim.y),
 		cell_number(height * width),
