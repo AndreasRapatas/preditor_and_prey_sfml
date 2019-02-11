@@ -16,6 +16,7 @@ project(
 add_executable(
 	${PROJECT_NAME}
 	./src/main.cpp
+	./src/predator_and_prey.cpp
 )
 
 # SFML
