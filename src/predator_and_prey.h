@@ -48,16 +48,10 @@ private:
 
 public:
 
-	PredatorAndPrey(sf::Vector2u dim) :
-		width(dim.x),
-		height(dim.y),
-		cell_number(height * width),
-		state(width, height),
+	PredatorAndPrey() :
 		type(0, 2),
 		move(-1, 1)
-	{
-		fill_random();
-	}
+	{}
 
 	void fill_random() {
 

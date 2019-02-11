@@ -9,7 +9,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 project(
 	predator_and_prey_sfml
-	VERSION 0.0.1
+	VERSION 0.0.2
 	LANGUAGES CXX
 )
 
@@ -21,7 +21,8 @@ add_executable(
 # SFML
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules" ${CMAKE_MODULE_PATH})
 find_package(SFML 2 REQUIRED graphics window system)
-find_package(CAVIS 0.0.1 CONFIG REQUIRED)
+find_package(CAVIS 1.2.0 CONFIG REQUIRED)
+find_package(flat_matrix 1.2.0 CONFIG REQUIRED)
 
 target_link_libraries(
 	${PROJECT_NAME}
