@@ -22,19 +22,6 @@ void PredatorAndPrey::fill_random() {
 	}
 }
 
-void PredatorAndPrey::fill_one() {
-
-	for (unsigned i = 0; i < cell_number; ++i) {
-
-		if (calc_x(i) > 150)
-			state[i] = Cell(Type::PREY);
-		else if(i % 2 == 0)
-			state[i] = Cell(Type::PREDITOR);
-		else
-			state[i] = Cell(Type::NOTHING);
-	}
-}
-
 unsigned PredatorAndPrey::calc_index(unsigned x, unsigned y) {
 	return (x + y * width);
 }

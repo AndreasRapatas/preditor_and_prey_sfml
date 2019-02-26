@@ -51,8 +51,6 @@ public:
 
 	void fill_random();
 
-	void fill_one() ;
-
 	unsigned calc_index(unsigned x, unsigned y);
 
 	unsigned calc_x(unsigned index);
