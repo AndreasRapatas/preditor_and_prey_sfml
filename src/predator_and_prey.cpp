@@ -45,46 +45,41 @@ void PredatorAndPrey::step() {
 
 		if (state[i].type == Type::NOTHING) { continue; }
 
+		if (state[i].type == Type::PREDITOR) {
+
+			// Is it dead?
+			if (--state[i].health == 0) {
+				state[i] = Cell();
+				continue;
+			}
+		}
+
 		x = calc_x(i);
 		y = calc_y(i);
 
 		new_x = move(generator) + x;
 		new_y = move(generator) + y;
 
+		// The random generator said it will not move
+		if (new_x == x && new_y == y) { continue; }
 		// Won't move because it reached the end of the board
 		if (new_x < 0 || (unsigned)new_x >= width) { continue; }
 		if (new_y < 0 || (unsigned)new_y >= height) { continue; }
-		// The random generator said it will not move
-		if (new_x == x && new_y == y) { continue; }
 
-		Cell &this_cell = state[i];
 		Cell &other_cell = state(new_x, new_y);
+		Cell &this_cell = state[i];
 
 		if (this_cell.type == Type::PREDITOR) {
 
-			// Is it dead?
-			if (--this_cell.health == 0) {
-				this_cell = Cell();
-				continue;
-			}
-
 			// Eat
 			if (other_cell.type == Type::PREY) {
-				this_cell.health += other_cell.health;
 				other_cell = Cell(Type::PREDITOR);
 			}
 
-			// This keeps the healthier preditors in the front line
-			std::swap(this_cell, other_cell);
-
 		} else {
 
-			++this_cell.health;
 			if (other_cell.type == Type::NOTHING) {
 				other_cell = Cell(Type::PREY);
-
-				// This keeps the newborns behind the healthy ones
-				std::swap(this_cell, other_cell);
 			}
 		}
 	}
