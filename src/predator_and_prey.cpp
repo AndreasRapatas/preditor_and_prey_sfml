@@ -13,10 +13,10 @@ void PredatorAndPrey::fill_random() {
 			state[i] = Cell();
 			break;
 		case 1:
-			state[i] = Cell(Type::PREY);
+			state[i] = Cell(Type::Prey);
 			break;
 		case 2:
-			state[i] = Cell(Type::PREDITOR);
+			state[i] = Cell(Type::Predator);
 			break;
 		}
 	}
@@ -43,9 +43,9 @@ void PredatorAndPrey::step() {
 
 	for (unsigned i = 0; i < cell_number; ++i) {
 
-		if (state[i].type == Type::NOTHING) { continue; }
+		if (state[i].type == Type::Nothing) { continue; }
 
-		if (state[i].type == Type::PREDITOR) {
+		if (state[i].type == Type::Predator) {
 
 			// Is it dead?
 			if (--state[i].health == 0) {
@@ -62,24 +62,27 @@ void PredatorAndPrey::step() {
 
 		// The random generator said it will not move
 		if (new_x == x && new_y == y) { continue; }
-		// Won't move because it reached the end of the board
-		if (new_x < 0 || (unsigned)new_x >= width) { continue; }
-		if (new_y < 0 || (unsigned)new_y >= height) { continue; }
+
+		// Wrap on the edges
+		if (new_x < 0) { new_x = width - 1; }
+		if ((unsigned) new_x == width) { new_x = 0; }
+		if (new_y < 0) { new_y = height - 1; }
+		if ((unsigned) new_y == height) { new_y = 0; }
 
 		Cell &other_cell = state(new_x, new_y);
 		Cell &this_cell = state[i];
 
-		if (this_cell.type == Type::PREDITOR) {
+		if (this_cell.type == Type::Predator) {
 
 			// Eat
-			if (other_cell.type == Type::PREY) {
-				other_cell = Cell(Type::PREDITOR);
+			if (other_cell.type == Type::Prey) {
+				other_cell = Cell(Type::Predator);
 			}
 
 		} else {
 
-			if (other_cell.type == Type::NOTHING) {
-				other_cell = Cell(Type::PREY);
+			if (other_cell.type == Type::Nothing) {
+				other_cell = Cell(Type::Prey);
 			}
 		}
 	}
@@ -89,11 +92,11 @@ sf::Color PredatorAndPrey::get_pixel(unsigned i) {
 
 	switch (state[i].type) {
 
-	case Type::NOTHING:
+	case Type::Nothing:
 		return {0, 0, 0};
-	case Type::PREDITOR:
+	case Type::Predator:
 		return {255, 0, 0};
-	case Type::PREY:
+	case Type::Prey:
 		return {0, 255, 0};
 	}
 }

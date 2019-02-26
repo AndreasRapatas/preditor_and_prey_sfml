@@ -11,9 +11,9 @@ class PredatorAndPrey : public CellularAutomaton {
 private:
 
 	enum class Type {
-		PREY,
-		PREDITOR,
-		NOTHING,
+		Predator,
+		Prey,
+		Nothing
 	};
 
 	struct Cell {
@@ -22,16 +22,14 @@ private:
 		unsigned health;
 
 		Cell() :
-			type(Type::NOTHING)
+			type(Type::Nothing),
+			health(0)
 		{}
 
-		Cell(Type t) :
-			type(t)
-		{
-			health = (type == Type::PREDITOR)
-				? 10 // Will die of age in 10 cycles
-				: 0; // Can't die of age
-		}
+		Cell(const Type &type) :
+			type(type),
+			health(type == Type::Predator ? 10 : 0)
+		{}
 	};
 
 	unsigned width;
@@ -39,7 +37,7 @@ private:
 	unsigned cell_number;
 	flat_matrix<Cell> state;
 
-	// Preditor - Prey - Nothing
+	// Predator - Prey - Nothing
 	std::uniform_int_distribution<unsigned> type;
 	// +1 or -1
 	std::uniform_int_distribution<int> move;
