@@ -30,6 +30,13 @@ private:
 			type(type),
 			health(type == Type::Predator ? 10 : 0)
 		{}
+
+		void age() {
+
+			if (--health == 0) {
+				type = Type::Nothing;
+			}
+		}
 	};
 
 	unsigned width;

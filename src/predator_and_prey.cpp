@@ -43,16 +43,9 @@ void PredatorAndPrey::step() {
 
 	for (unsigned i = 0; i < cell_number; ++i) {
 
+		state[i].age();
+
 		if (state[i].type == Type::Nothing) { continue; }
-
-		if (state[i].type == Type::Predator) {
-
-			// Is it dead?
-			if (--state[i].health == 0) {
-				state[i] = Cell();
-				continue;
-			}
-		}
 
 		x = calc_x(i);
 		y = calc_y(i);
